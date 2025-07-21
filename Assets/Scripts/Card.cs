@@ -9,12 +9,16 @@ public class Card : MonoBehaviour
     public Sprite ItemSprite;
 
     private bool isSelected = false;
-    
+    CardManager manager;
+    private void Start()
+    {
+        manager = CardManager.instance;
+    }
     public void OnCardClick()
     {
         if (!isSelected)
         {
-            Show();
+            manager.CardSelected(this);
         }
     }
     public void Show()
