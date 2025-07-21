@@ -1,0 +1,53 @@
+# =============== #
+# Unity generated #
+# =============== #
+
+[Ll]ibrary/
+[Tt]emp/
+[Oo]bj/
+[Bb]uild/
+[Bb]uilds/
+[Ll]ogs/
+MemoryCaptures/
+
+# Rider
+.idea/
+*.sln.iml
+
+# Auto-generated VS/JetBrains project files
+ExportedObj/
+.consulo/
+*.csproj
+*.unityproj
+*.sln
+*.suo
+*.tmp
+*.user
+*.userprefs
+*.pidb
+*.booproj
+*.svd
+
+# OS-specific
+.DS_Store
+*.swp
+*.lock
+Thumbs.db
+
+# Crash logs
+sysinfo.txt
+
+# Visual Studio Code
+.vscode/
+
+# Unity Collab
+.collab/
+
+# Addressables
+AssetImportState
+
+# Builds (optional)
+*.apk
+*.aab
+*.xcodeproj
+*.xcworkspace
