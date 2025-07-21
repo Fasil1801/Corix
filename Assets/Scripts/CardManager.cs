@@ -4,6 +4,7 @@ using UnityEngine;
 public class CardManager : MonoBehaviour
 {
     public static CardManager instance { get; private set;}
+    public float InitialShowTime = 2f;
 
     Card firstCard, secondCard;
 

@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -13,6 +14,7 @@ public class Card : MonoBehaviour
     private void Start()
     {
         manager = CardManager.instance;
+        StartCoroutine(InitialShow());
     }
     public void OnCardClick()
     {
@@ -20,6 +22,10 @@ public class Card : MonoBehaviour
         {
             manager.CardSelected(this);
         }
+    }
+    public void SetItem(Sprite sprite)
+    {
+        ItemSprite = sprite;
     }
     public void Show()
     {
@@ -31,5 +37,11 @@ public class Card : MonoBehaviour
     {
         _Item.sprite = HiddenItemSprite;
         isSelected = false;
+    }
+    IEnumerator InitialShow()
+    {
+        Show();
+        yield return new WaitForSeconds(manager.InitialShowTime);
+        Hide();
     }
 }
