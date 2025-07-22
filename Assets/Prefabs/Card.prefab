@@ -149,7 +149,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _Item: {fileID: 4894294972464703710}
   HiddenItemSprite: {fileID: 21300000, guid: 2075b79235c7ba840a9d74d7f33bda46, type: 3}
-  ItemSprite: {fileID: 362637693, guid: 560ca21fc5235ee4b87b5fdef67ac577, type: 3}
+  ItemSprite: {fileID: 21300000, guid: 3d5bad30f371d144686c529f9dafd30f, type: 3}
 --- !u!1 &6019852358309515091
 GameObject:
   m_ObjectHideFlags: 0
