@@ -10,7 +10,7 @@ public class CardManager : MonoBehaviour
     Card firstCard, secondCard;
     private bool isChecking = false;
     UiManager uiManager;
-
+    AudioManager audioManager;
     private void Awake()
     {
         instance = this;
@@ -18,12 +18,14 @@ public class CardManager : MonoBehaviour
     private void Start()
     {
         uiManager = UiManager.instance;
+        audioManager = AudioManager.instance;
         uiManager.SetMaxTurn(MaxTurn);
     }
     public void CardSelected(Card card)
     {
         if (isChecking) return;
         card.Show();
+        audioManager.PlayFlip();
         if (firstCard == null)
         {
             firstCard = card;
@@ -42,12 +44,14 @@ public class CardManager : MonoBehaviour
 
         if (firstCard.ItemSprite == secondCard.ItemSprite)
         {
+            audioManager.PlayMatch();
             Destroy(fist.gameObject);
             Destroy(second.gameObject);
             uiManager.SetMatch();
         }
         else
         {
+            audioManager.PlayMisMatch();
             fist.Hide();
             second.Hide();
             uiManager.SetTurn();

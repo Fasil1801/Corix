@@ -1,3 +1,4 @@
+using System.Collections;
 using TMPro;
 using UnityEditor.SearchService;
 using UnityEngine;
@@ -11,11 +12,16 @@ public class UiManager : MonoBehaviour
     [SerializeField] private GameObject _gameOverPanel;
     [SerializeField] private GameObject _gameWonPanel;
     [SerializeField] private GameObject _pausePanel;
+    [SerializeField] private GameObject _pauseBtn;
     [SerializeField] GameObject container;
 
     private int _match = 0;
     private int _turnLeft = 0;
     public static UiManager instance;
+    private AudioManager audioManager;
+    private CardManager cardManager;
+    private bool _isOver = false;
+    private bool _isWon = false;
     private void Awake()
     {
         if (instance == null)
@@ -23,17 +29,21 @@ public class UiManager : MonoBehaviour
         else
             Destroy(gameObject);
     }
+    private void Start()
+    {
+        audioManager = AudioManager.instance;
+        cardManager = CardManager.instance;
+        StartCoroutine(ActivePauseButton());
+    }
     private void Update()
     {
         if (container.transform.childCount == 0)
         {
-            _gameWonPanel.SetActive(true);
-            container.SetActive(false);
+            Won();
         }
         if (_turnLeft == 0)
         {
-            _gameOverPanel.SetActive(true);
-            container.SetActive(false);
+            GameOver();
         }
     }
     public void SetMatch()
@@ -60,11 +70,13 @@ public class UiManager : MonoBehaviour
     {
         _pausePanel.SetActive(false);
         container.SetActive(true);
+        _pauseBtn.SetActive(true);
     }
     public void Pause()
     {
         _pausePanel.SetActive(true);
         container.SetActive(false);
+        _pauseBtn.SetActive(false);
     }
     public void Next()
     {
@@ -74,5 +86,26 @@ public class UiManager : MonoBehaviour
     public void Exit()
     {
         SceneManager.LoadScene(0);
+    }
+    void GameOver()
+    {
+        if (_isOver) return;
+        _gameOverPanel.SetActive(true);
+        container.SetActive(false);
+        audioManager.PlayLose();
+        _isOver = true;
+    }
+    void Won()
+    {
+        if (_isWon) return;
+        _gameWonPanel.SetActive(true);
+        container.SetActive(false);
+        audioManager.PlayWin();
+        _isWon = true;
+    }
+    IEnumerator ActivePauseButton()
+    {
+        yield return new WaitForSeconds(cardManager.InitialShowTime);
+        _pauseBtn.SetActive(true);
     }
 }
