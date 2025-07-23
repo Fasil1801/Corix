@@ -14,12 +14,14 @@ public class UiManager : MonoBehaviour
     [SerializeField] private GameObject _pausePanel;
     [SerializeField] private GameObject _pauseBtn;
     [SerializeField] GameObject container;
+    [SerializeField] string NextLevel = "Medium";
 
     private int _match = 0;
     private int _turnLeft = 0;
     public static UiManager instance;
     private AudioManager audioManager;
     private CardManager cardManager;
+
     private bool _isOver = false;
     private bool _isWon = false;
     private void Awake()
@@ -102,6 +104,8 @@ public class UiManager : MonoBehaviour
         container.SetActive(false);
         audioManager.PlayWin();
         _isWon = true;
+        PlayerPrefs.SetInt(NextLevel, 1);
+        PlayerPrefs.Save();
     }
     IEnumerator ActivePauseButton()
     {
